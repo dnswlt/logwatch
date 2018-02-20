@@ -44,6 +44,7 @@ func WatchFile(filename string, pattern string, ch chan LogEvent, wg *sync.WaitG
 		log.Fatal(err)
 	}
 	defer file.Close()
+	file.Seek(0, 2) // Start at current end of file
 	reader := bufio.NewReader(file)
 	for {
 		line, err := reader.ReadString('\n')
